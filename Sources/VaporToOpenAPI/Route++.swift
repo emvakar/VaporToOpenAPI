@@ -66,7 +66,7 @@ public extension Route {
 			operationId: operationId,
 			externalDocs: externalDocs,
 			query: query?.value,
-			headers: headers?.value,
+            headers: headers?.value ?? openAPIHeaders,
 			path: path?.value,
 			cookies: cookies?.value,
 			body: body?.value,
@@ -388,6 +388,11 @@ extension Route {
 	var tags: [TagObject] {
 		values.tags ?? []
 	}
+
+    var openAPIHeaders: OpenAPIValue? {
+        get { values[keyPath: \.openAPIHeaders] ?? nil }
+        set { values[keyPath: \.openAPIHeaders] = newValue }
+    }
 
 	var openAPIMethod: PathItemObject.Method {
 		values.openAPIMethod ?? method.openAPI

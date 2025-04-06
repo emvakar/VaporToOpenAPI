@@ -85,6 +85,14 @@ public extension RoutesBuilder {
 			route.excludeFromOpenAPI()
 		}
 	}
+
+    /// Group routes with OpenAPI headers
+    func groupedOpenAPI(headers: OpenAPIParameters) -> RoutesBuilder {
+        HTTPRoutesGroup(root: self) { route in
+            route.set(\.openAPIHeaders, to: headers.value)
+        }
+    }
+
 }
 
 /// Groups routes
